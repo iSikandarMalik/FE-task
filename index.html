@@ -8,18 +8,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="relative overflow-hidden">
+
 <nav class="fixed top-0 left-0 w-full flex flex-wrap items-center justify-between py-4 px-10 bg-white z-50">
-    <a href="/" class="flex items-center">
-        <img src="/assets/icons/logo.svg" class="w-60 h-auto object-contain m-4" alt="Logo"/>
-    </a>
+    <div class="flex gap-4">
+        <button class="lg:hidden openbtn" onclick="handleSidebar()">☰</button>
+        <a href="/" class="flex items-center">
+            <img src="/assets/icons/logo.svg" class="w-60 h-auto object-contain m-4" alt="Logo"/>
+        </a>
+    </div>
     <div class="relative">
         <img src="/assets/icons/bell.svg" alt="bell icon" class="w-10 h-auto object-contain">
         <div class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></div>
     </div>
 </nav>
 
-<aside class="fixed top-20 left-0 w-80 h-screen bg-white z-10 pt-10 overflow-y-auto">
+<aside id="sidebar" class="sidebar fixed top-20 -translate-x-full lg:translate-x-0 lg:left-0 w-80 h-screen bg-white z-10 pt-10 overflow-y-auto transition-all duration-300">
     <div class="flex flex-col items-center justify-center gap-2">
         <div class="relative">
             <img src="/assets/icons/avatar.svg" alt="avatar icon" class="w-24 h-auto object-contain"/>
@@ -74,8 +78,9 @@
     </div>
 </aside>
 
-<div class="w-full h-screen bg-[#F6F7FB] overflow-y-auto pl-80 pt-32 pb-10">
-    <div class="px-10">
+<div class="w-full h-screen bg-[#F6F7FB] overflow-y-auto lg:pl-80">
+    <div id="sidebar-overlay" class="hidden bg-gray-800 bg-opacity-30 duration-300 transition-all ml-80 w-full h-full absolute z-20 overflow-auto" onclick="closeNav()"></div>
+    <div class="px-4 lg:px-10 pt-32 pb-10">
         <div class="flex items-end justify-end gap-4">
             <button class="bg-[#9C8657] text-white px-8 py-4 rounded-2xl flex items-center justify-center gap-2 font-medium">
                 <img src="/assets/icons/calendar.png" alt="calendar icon" class="w-5 h-auto object-contain"/>
@@ -87,16 +92,16 @@
             </button>
         </div>
 
-        <div class="bg-white h-full ml-10 mt-10 px-10 py-6">
+        <div class="bg-white h-full mt-10 px-10 py-6">
             <p class="text-2xl font-medium text-[#9C8657]">Company Information</p>
             <p class="text-[#696C73] text-base font-medium opacity-90 pt-6">Company Logo *</p>
             <div class="grid grid-cols-2 gap-4 pb-6">
                 <div class="flex flex-col gap-2">
                     <img src="/assets/icons/Mckinsey-logo.png" alt="company logo"
-                         class="w-full h-auto object-contain bg-[#32508B] py-2 px-5">
+                         class="w-full h-[100px] object-contain bg-[#32508B] md:py-2 md:px-5">
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="border-4 border-dashed h-full flex flex-col items-center justify-center relative">
+                    <div class="border-4 border-dashed h-[100px] flex flex-col items-center justify-center relative">
                         <input type="file"
                                style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;"
                                class="cursor-pointer"/>
@@ -116,7 +121,7 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     <p class="text-[#696C73] text-base font-medium opacity-90">Company Type *</p>
-                    <div class="custom-select w-full h-16">
+                    <div class="custom-select w-full h-16 truncate">
                         <select class="align-center">
                             <option value="0">Select (Corporation/NGO/School/Government)</option>
                             <option value="1">Corporation</option>
@@ -144,13 +149,14 @@
             </div>
         </div>
 
-        <div class="bg-white h-full ml-10 mt-10 px-10 py-6">
+        <div class="bg-white h-full mt-10 px-10 py-6">
             <div class="flex items-center justify-between pb-4">
                 <p class="text-2xl font-medium text-[#9C8657] pb-6">Company Addresses</p>
                 <button class="bg-[#9C8657] text-white text-3xl px-2 pb-1 rounded flex items-center justify-center font-medium">
                     +
                 </button>
             </div>
+
             <table class="table-fixed w-full overflow-x-scroll">
                 <tr>
                     <th style="width: 40%"></th>
@@ -165,7 +171,7 @@
                     <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4">
                         <a href="tel:+971 (4) 389 9000">+971 (4) 389 9000</a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -179,7 +185,7 @@
                     <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4">
                         <a href="tel:+971 (4) 389 9000">+971 (4) 389 9000</a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -193,7 +199,7 @@
                     <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4">
                         <a href="tel:+971 (4) 389 9000">+971 (4) 389 9000</a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -207,7 +213,7 @@
                     <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4">
                         <a href="tel:+971 (4) 389 9000">+971 (4) 389 9000</a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -217,7 +223,7 @@
             </table>
         </div>
 
-        <div class="bg-white h-full ml-10 mt-10 px-10 py-6">
+        <div class="bg-white h-full mt-10 px-10 py-6">
             <div class="flex items-center justify-between pb-4">
                 <p class="text-2xl font-medium text-[#9C8657] pb-6">Contacts</p>
                 <button class="bg-[#9C8657] text-white text-3xl px-2 pb-1 rounded flex items-center justify-center font-medium">
@@ -244,7 +250,7 @@
                             +971 (4) 389 9000
                         </a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -263,7 +269,7 @@
                             +971 (4) 389 9000
                         </a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -282,7 +288,7 @@
                             +971 (4) 389 9000
                         </a>
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-end">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-end">
                         <a href="mailto:dbx_uae@mckinsey.com">dbx_uae@mckinsey.com</a>
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">
@@ -292,7 +298,7 @@
             </table>
         </div>
 
-        <div class="bg-white h-full ml-10 mt-10 px-10 py-6">
+        <div class="bg-white h-full mt-10 px-10 py-6">
             <div class="flex items-center justify-between pb-4">
                 <p class="text-2xl font-medium text-[#9C8657] pb-6">
                     Associated Clinicians
@@ -303,16 +309,16 @@
             </div>
             <table class="table-fixed w-full overflow-x-scroll">
                 <tr>
+                    <th style="width: 40%"></th>
+                    <th style="width: 40%"></th>
                     <th style="width: 20%"></th>
-                    <th style="width: 30%"></th>
-                    <th style="width: 50%"></th>
                 </tr>
                 <tr class="border-b-4 border-[#FBFBFB]">
                     <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 flex items-center justify-start gap-2">
                         <img src="/assets/icons/avatar.svg" alt="avatar" class="w-10 h-auto">
                         Juan Korkie
                     </td>
-                    <td class="text-[#4C6F93] text-base font-medium truncate max-w-max pb-4 text-center">
+                    <td class="text-[#4C6F93] text-base font-medium truncate pb-4 text-center">
                         Clinical Psychologist
                     </td>
                     <td class="text-[#4C6F93] text-base font-medium truncate pb-4 flex justify-end">

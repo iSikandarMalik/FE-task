@@ -76,3 +76,26 @@ function active_item () {
 pages.forEach((item) => {
     item.addEventListener('click', active_item)
 })
+
+{/** To: toggle sidebar */}
+let isSideBarOpen = false
+
+function handleSidebar() {
+    if (isSideBarOpen) {
+        closeNav()
+        isSideBarOpen = false
+    } else {
+        openNav()
+        isSideBarOpen = true
+    }
+}
+
+const openNav = () => {
+    document.getElementById("sidebar").style.transform = 'translateX(0)'
+    document.getElementById("sidebar-overlay").style.display = 'block'
+}
+
+const closeNav = () => {
+    document.getElementById("sidebar").style.transform = "translateX(-100%)"
+    document.getElementById("sidebar-overlay").style.display = 'none'
+}
